@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>login</title>
+　<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<form action="/login" method="post">
+    <p>账号：<input type="text" name="username" id="userName"/></p>
+    <p>密码：<input type="text" name="password" id="pwd" /></p>
+    <P><input type="checkbox" name="rememberMe" id="rememberMe" checked="checked" />记住我</P>
+    <p><input type="submit" id="logBtn" value="登录"/></p>
+</form>
+</body>
+<script type="text/javascript">
+
+$(function(){
+	$.ajax({
+	    type: "GET",
+	    url: "/autoLogin",
+	    data: {},
+	    dataType: "json",
+	    success: function(data){
+	    	if(data.res == "ok"){
+	    		 $('#userName').val(data.userName);
+		    	 $('#pwd').val(data.pwd);
+	     		 $('#rememberMe').attr('checked', ('yes' == data.rememberMe) ? true : false);
+	     		 $("#logBtn").click();
+	    	}
+	    	
+	    }
+	});	
+	
+})
+
+</script>
+</html>
